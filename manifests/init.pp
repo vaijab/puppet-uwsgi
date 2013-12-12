@@ -30,6 +30,12 @@ class uwsgi(
       $run_user       = 'www-data'
       $app_config_dir = '/etc/uwsgi/apps-enabled'
     }
+    Debian: {
+      $package_name   = 'uwsgi'
+      $service_name   = 'uwsgi'
+      $run_user       = 'www-data'
+      $app_config_dir = '/etc/uwsgi/apps-enabled'
+    }
     default: {
       fail("Module ${module_name} is not supported on ${::operatingsystem}")
     }
