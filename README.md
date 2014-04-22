@@ -1,9 +1,13 @@
 uwsgi
 ===
-This module installs and configures uWSGI Emperor service. If you
-want to configure and run uWSGI apps, see `uwsgi::app` class.
+This module installs [uWSGI][] and configures it for [Emperor mode][]. If you
+want to configure and run uWSGI apps, see the `uwsgi::app` class.
 
-This module is most flexible and most easier to manage when used with hiera.
+This module is most flexible and easiest to manage when used with [Hiera][].
+
+[uWSGI]: http://uwsgi-docs.readthedocs.org/en/latest/index.html
+[Emperor mode]: http://uwsgi-docs.readthedocs.org/en/latest/Emperor.html
+[Hiera]: http://docs.puppetlabs.com/hiera/1/index.html
 
 ## Classes
 
@@ -20,11 +24,23 @@ Default: `running`.
 * `onboot` - whether to enable or disable the service on boot. Valid values:
 `true`, `false` or `manual`. Default: `true`.
 
+* `config` - Valid [uWSGI configuration options][] for the uWSGI server. It is a hash, so any
+uWSGI valid key-value pairs as parameters.
+
+[uWSGI configuration options]: http://uwsgi-docs.readthedocs.org/en/latest/Options.html
+
 
 #### Examples
     ---
     classes:
       - uwsgi
+    
+    # override default params
+    uwsgi::onboot: manual
+    
+    # Add extra configs to default wsgi config
+    uwsgi::config:
+      chmod-socket: 664
 
 ### uwsgi::app
 This class allows you to configure uWSGI apps.
@@ -33,8 +49,8 @@ This class allows you to configure uWSGI apps.
 * `ensure` - Determines the state of the application configuration.
 Default: `present`. Valid values: `present` or `absent`.
 
-* `config` - Valid uwsgi app specific configuration. It is a hash, so any
-uwsgi valid key-value pairs parameters.
+* `config` - Valid [uWSGI configuration options][] specific to an app. It is a hash, so any
+uWSGI valid key-value pairs as parameters.
 
 * `uid` - User name to run uwsgi process on for this app. User must exist.
 Default: `www-data` for Ubuntu/Debian and `uwsgi` for Fedora/RedHat.

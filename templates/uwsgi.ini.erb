@@ -11,3 +11,12 @@ emperor-tyrant = true
 master = true
 autoload = true
 log-date = true
+<%
+if @config
+  @config.sort.each do |key, value|
+-%>
+<%= key %> = <%= value%>
+<%
+  end
+end
+-%>

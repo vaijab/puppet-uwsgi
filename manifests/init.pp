@@ -15,6 +15,7 @@ class uwsgi(
     $service = 'running',
     $onboot  = true,
     $package = 'installed',
+    $config = undef,
 ) {
   case $::operatingsystem {
     Fedora: {
