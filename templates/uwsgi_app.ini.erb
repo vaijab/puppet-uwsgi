@@ -9,9 +9,14 @@ gid = <%= @gid %>
 <%
 if @config
   @config.sort.each do |key, value|
--%>
+    if value.is_a?(Array)
+      value.each do |subvalue| -%>
+<%= key %> = <%= subvalue %>
+<%-   end
+    else -%>
 <%= key %> = <%= value%>
 <%
+    end
   end
 end
 -%>
