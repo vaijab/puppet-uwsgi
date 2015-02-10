@@ -70,6 +70,9 @@ class uwsgi(
       source => "puppet:///modules/${module_name}/uwsgi_upstart.conf",
       before => [Package[$package_name], Service[$service_name]],
     }
+    $service_provider = 'upstart'
+  } else {
+    $service_provider = undef
   }
 
   file { $config_file:
@@ -90,5 +93,6 @@ class uwsgi(
     require    => [ Package[$package_name],
                     Package[$default_plugins],
                     File[$config_file] ],
+    provider   => $service_provider,
   }
 }
