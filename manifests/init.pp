@@ -17,23 +17,17 @@ class uwsgi(
     $package = 'installed',
     $config  = undef,
 ) {
-  case $::operatingsystem {
-    Fedora: {
+  case $::osfamily {
+    'RedHat': {
       $package_name   = 'uwsgi'
       $service_name   = 'uwsgi'
       $run_user       = 'uwsgi'
       $app_config_dir = '/etc/uwsgi.d'
     }
-    Ubuntu: {
+    'Debian': {
       $package_name   = 'uwsgi'
       $service_name   = 'uwsgi'
       $upstart_script = '/etc/init/uwsgi.conf'
-      $run_user       = 'www-data'
-      $app_config_dir = '/etc/uwsgi/apps-enabled'
-    }
-    Debian: {
-      $package_name   = 'uwsgi'
-      $service_name   = 'uwsgi'
       $run_user       = 'www-data'
       $app_config_dir = '/etc/uwsgi/apps-enabled'
     }
