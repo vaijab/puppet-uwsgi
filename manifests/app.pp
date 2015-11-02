@@ -11,7 +11,7 @@
 # - Vaidas Jablonskis <jablonskis@gmail.com>
 #
 class uwsgi::app inherits uwsgi {
-  if $::uwsgi::app != 'undef' {
+  if defined('uwsgi::app') {
     create_resources(uwsgi::manage_app,
       hiera_hash('uwsgi::app', undef)
     )
